@@ -156,7 +156,7 @@ print(mycursor.rowcount, "was inserted.")
 ################################################################
 
 ## CONTENT HAS THE FOLLOWING COLUMNS:
-## C_ID (AUTO INCREMENTED), DIS_ID, last_viewd, type, tier, description, genre
+## C_ID (AUTO INCREMENTED), DIS_ID, title, last_viewd, type, tier, description, genre
 ## DIS_ID references the DISTRIBUTOR table
 
 ## DIS_ID randomly selected from DISTRIBUTOR (200)
@@ -180,12 +180,13 @@ genres = ["action", "romance", "mystery", "horror", "comedy"]
 
 ## Inserting data
 
-sql = "INSERT INTO CONTENT (DIS_ID, last_viewed, type, tier, description, genre) VALUES (%s, %s, %s, %s, %s, %s)"
+sql = "INSERT INTO CONTENT (DIS_ID, title, last_viewed, type, tier, description, genre) VALUES (%s, %s, %s, %s, %s, %s, %s)"
 val = []
 for _ in range(2000):
     val.append(
         (
             np.random.randint(1, 201),
+            silly.thing(),
             fake.date_time_between(start_date=start_date, end_date="now"),
             np.random.choice(diff_types, p=types_weight),
             np.random.choice(plans, p=plans_weights),

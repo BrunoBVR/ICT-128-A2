@@ -83,6 +83,7 @@ create_content = """
 CREATE TABLE IF NOT EXISTS `CONTENT` (
   `C_ID` INT AUTO_INCREMENT,
   `DIS_ID` INT NOT NULL,
+  `title` VARCHAR(100) NOT NULL,
   `last_viewed` DATETIME,
   `type` VARCHAR(20),
   `tier` VARCHAR(9) NOT NULL,
@@ -246,27 +247,27 @@ mycursor.execute(stream_to_date_trigg)
 for x in mycursor:
     print(x)
 
-# Trigger to prevent more than 4 customers in each account
+# # Trigger to prevent more than 4 customers in each account
 
-cx_trigger = """
-DELIMITER //
-CREATE TRIGGER PreventMoreCustomers BEFORE INSERT ON CUSTOMER
-FOR EACH ROW
-BEGIN
-    IF(
-        (SELECT COUNT(*)
-         FROM ACCOUNT
-         WHERE ACC_ID = NEW.ACC_ID
-         GROUP BY ACC_ID) > 4
-    ) THEN
-    SIGNAL SQLSTATE '45000'
-    SET MESSAGE_TEXT = 'Account maxed out';
-    END IF;
-END //
-DELIMITER ;
-"""
-# Execute trigger
-mycursor.execute(cx_trigger)
+# cx_trigger = """
+# DELIMITER //
+# CREATE TRIGGER PreventMoreCustomers BEFORE INSERT ON CUSTOMER
+# FOR EACH ROW
+# BEGIN
+#     IF(
+#         (SELECT COUNT(*)
+#          FROM ACCOUNT
+#          WHERE ACC_ID = NEW.ACC_ID
+#          GROUP BY ACC_ID) > 4
+#     ) THEN
+#     SIGNAL SQLSTATE '45000'
+#     SET MESSAGE_TEXT = 'Account maxed out';
+#     END IF;
+# END //
+# DELIMITER ;
+# """
+# # Execute trigger
+# mycursor.execute(cx_trigger)
 
 #################################################################
 ## EXTRA CONSTRAINTS
