@@ -397,3 +397,7 @@ The required modules are:
 - `pandas`          -> to read and write data on countries
 - `silly`           -> to generated descriptions and locations
 - `faker`           -> to generate names and emails
+
+#### COnverting MySQL database to SQLite:
+
+Use [this](https://pypi.org/project/mysql-to-sqlite3/) tool.
