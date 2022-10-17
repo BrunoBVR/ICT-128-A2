@@ -10,6 +10,8 @@ The [ERD](ICT128-I-color.pdf) was not considerably changed from phase I of this 
 * The Foreign Key *S_ID* was removed from the *PAYMENT* table.
 * Some *VARCHAR* variables had their length increased to accomodate data.
 
+![image](OnlineMediaSubscription.png)
+
 ### Database dumped
 
 The database was dumped into [this](ict128_dump.sql) file using [this](mysqldump-all.sh) script.
