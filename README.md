@@ -398,6 +398,6 @@ The required modules are:
 - `silly`           -> to generated descriptions and locations
 - `faker`           -> to generate names and emails
 
-#### COnverting MySQL database to SQLite:
+#### Converting MySQL database to SQLite:
 
 Use [this](https://pypi.org/project/mysql-to-sqlite3/) tool.

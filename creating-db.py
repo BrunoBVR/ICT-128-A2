@@ -209,6 +209,8 @@ for x in mycursor:
 mydb = mysql.connector.connect(host="localhost", user="bruno", database="ict128")
 mycursor = mydb.cursor()
 
+# 900 days in seconds = 77760000
+
 ## Trigger for STREAM -> DATE_KEEP
 stream_to_date_trigg = """
 CREATE TRIGGER stream_date_trigg
@@ -216,7 +218,7 @@ CREATE TRIGGER stream_date_trigg
     ON STREAM FOR EACH ROW
     INSERT INTO DATE_KEEP(D_ID, date_time)
     VALUES(NEW.D_ID,
-           FROM_UNIXTIME( UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 25920000) ) )
+           FROM_UNIXTIME( UNIX_TIMESTAMP('2020-01-01 14:53:27') + FLOOR(0 + (RAND() * 77760000) ) )
     );
 """
 
@@ -231,18 +233,20 @@ for x in mycursor:
 mydb = mysql.connector.connect(host="localhost", user="bruno", database="ict128")
 mycursor = mydb.cursor()
 
-stream_to_date_trigg = """
+# One year in seconds = 31536000
+
+payment_to_date_trigg = """
 CREATE TRIGGER payment_date_trigg
     BEFORE INSERT
     ON PAYMENT FOR EACH ROW
     INSERT INTO DATE_KEEP(D_ID, date_time)
     VALUES(NEW.D_ID,
-           FROM_UNIXTIME( UNIX_TIMESTAMP('2010-04-30 14:53:27') + FLOOR(0 + (RAND() * 25920000) ) )
+           FROM_UNIXTIME( UNIX_TIMESTAMP('2020-01-01 14:53:27') + FLOOR(0 + (RAND() * 31536000) ) )
     );
 """
 
 # Execute trigger
-mycursor.execute(stream_to_date_trigg)
+mycursor.execute(payment_to_date_trigg)
 
 for x in mycursor:
     print(x)
